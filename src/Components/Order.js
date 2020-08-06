@@ -3,6 +3,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import CloseIcon from "@material-ui/icons/Close";
+// import { DeleteForeverIcon, CloseIcon } from "@material-ui/icons";
 
 const Order = (props) => {
   const limitTitle = (title, limit) => {
@@ -24,9 +25,13 @@ const Order = (props) => {
     const count = props.order[orderId];
     return (
       <li>
-        <span>
+        <div className="item__name">
+          <span>{count}x</span>
+          <p className="par">{orderedItem.name}</p>
+        </div>
+        {/* <span>
           {count} x {orderedItem.name}
-        </span>
+        </span> */}
         <strong>{formatPrice(count * orderedItem.price)}</strong>
         <button
           class="delete__btn"
@@ -61,36 +66,6 @@ const Order = (props) => {
       <h2 className="order__header">Order</h2>
       <ul>{orderIds.map(renderOrder)}</ul>
 
-      {/* <TransitionGroup component="ul">
-            {orderIds.map(orderId =>
-                <CSSTransition 
-                    classNames="order" 
-                    key={orderId} 
-                    timeout={{enter:200,exit:500}}>
-                <li key={orderId}
-                     onMouseEnter={props.handleMouseHover}
-                     onMouseLeave={props.handleMouseHover}
-                                > 
-                  <div
-                     >
-                      <TransitionGroup component="span" className="count">
-                          <CSSTransition 
-                            classNames="count" 
-                            key={props.order[orderId]} 
-                            timeout={{enter:200,exit:200}}>
-                            <span className="count__number">{props.order[orderId]} x </span>
-                          </CSSTransition>
-                      </TransitionGroup>
-                      {items[orderId].name}:{formatPrice(items[orderId].price)}
-                    
-                        <button class="delete__btn"
-                        onClick={()=>props.removeFromOrder(orderId)}><DeleteForeverIcon />
-                    </button>               
-                  </div>
-                </li>
-                </CSSTransition>
-                )}
-            </TransitionGroup> */}
       <div className="order__total">
         Total:
         {formatPrice(total)}
